@@ -1,0 +1,2 @@
+## Empty file required by docker executable as per entry in docker-compose.yaml 
+## env_file: .dockerenv
