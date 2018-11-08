@@ -8,7 +8,7 @@ A service for tool awareness and organization.
 
 Developing on unix based systems is only supported at this moment.
 
-Run the setup script and follow the instructions.
+Run the setup script and follow the instructions on ubuntu & MAC OS.
 
 ```bash
 ./script/setup
