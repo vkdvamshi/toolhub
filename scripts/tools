@@ -33,15 +33,7 @@ cecho(){
 # detect_platform
 # detects Debian, OS X and OS X + brew
 detect_platform() {
-    if [ "$(which apt-get)" ]; then
-        echo "Debian"
-    elif [[ "$(uname -s)" = "Darwin" ]]; then
-        if [ "$(which brew)" ]; then
-            echo "OSX_BREW"
-        else
-            echo "OSX"
-        fi
-    fi
+echo `uname -s`
 }
 
 # resolve_path "<path>"
