@@ -45,7 +45,7 @@ done
 set -- "${POSITIONAL[@]}"
 
 
-if [ $(which docker) ]; then
+if [[ $(which docker) ]]; then
     cecho "Docker found on system." yellow bold
     if [ "$force" ]; then
         cecho "Forcing reinstall" yellow bold
@@ -64,7 +64,9 @@ fi
 PLATFORM="$(detect_platform)"
 
 case "$PLATFORM" in
-    "Debian")
+    "Linux|GNULinux")
+	    if [[ $PLATFORM -eq "Linux" ]];then PKGMGR="yum"
+		if [[ $PLATFORM -eq "GNULinux" ]]; then PKGMGR="sudo apt-get"
         if [[ "$PATH" != *"$HOME/.local/bin"* ]]; then
             cecho "It is recommended that you install docker-compose at the user level. This requires adding" yellow bold
             cecho "$HOME/.local/bin to your PATH in your .profile, .zprofile or equivalent. " yellow bold
@@ -97,13 +99,12 @@ case "$PLATFORM" in
         echo
         cecho "Installing Docker CE..." default bold
         echo
-        sudo apt-get update
-        sudo apt-get install -y docker-ce
+        ${PKGMGR} install -y docker*
 
         echo
         cecho "Installing Docker Compose..." default bold
         echo
-        sudo apt-get install -y python-pip
+        ${PKGMGR} install -y python-pip pip
         if [[ "$PATH" == *"$HOME/.local/bin"* ]]; then
             if [ $VIRTUAL_ENV ]; then
                 . $VIRTUAL_ENV/bin/activate
@@ -137,7 +138,17 @@ case "$PLATFORM" in
         cecho "Please complete Docker setup in the dialogs that popup. Setup is complete when" blue bold
         cecho "the Docker icon appears on your menu bar and the top menu item indicates \"Docker is running\"." blue bold
         ;;
-    *)
+    "MSYS_NT-10.0")
+	     cecho "Please make sure to install Docker" blue bold
+		 if [[ `which docker` ]];
+		 then 
+			cecho " Docker found in environment proceeding with next steps" blue bold
+		 else
+			cecho "Docker not found in environment, Please install " blue bold
+		 
+
+	     ;;
+	*)
         cecho "I don't know how to setup your platform." red bold
         exit 2
         ;;
