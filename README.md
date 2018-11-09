@@ -6,7 +6,8 @@ A service for tool awareness and organization.
 
 ## Installation
 
-Developing on unix based systems is only supported at this moment.
+Development support on Linux/Ubuntu/OSX Platforms
+Development on Windwos requires Docker pre-installed & "Windows Sub-System for Linux" feature enabled through control panel --> programs & features --> Turn Windows features on/off --> check "windows sub System for Linux"
 
 Run the setup script and follow the instructions.
 
